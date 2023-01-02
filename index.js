@@ -86,3 +86,62 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+
+// total number of months included in the dataset
+let numberOfMonth = finances.length;
+
+// net total amount of Profit/Losses over the entire period.
+let totalProfit = finances[0][1];
+
+// average of the **changes** in Profit/Losses over the entire period.
+//  * You will need to track what the total change in profits are from month to month and then find the average.
+//  * (`Total/Number of months`)
+let averageChange = finances[0][1];
+let monthlyChange;
+
+// The greatest increase in profits (date and amount) over the entire period.
+let maxChangeAmount = finances[0][1];
+let maxChangeMonth = finances[0][0];
+
+// The greatest decrease in losses (date and amount) over the entire period.
+let minChangeAmount = finances[0][1];
+let minChangeMonth = finances[0][0];
+
+// all data is intialised with the first month, assuming the first month is equal to the first change
+// starting with the second month to be able to look at the previous month
+for (let index = 1; index < numberOfMonth; index++) {
+    // total Profit
+    totalProfit += finances[index][1];
+
+    // monthly change in profits
+    monthlyChange = finances[index][1] - finances[index-1][1];
+    averageChange += monthlyChange;
+
+    // greatest increase
+    if (monthlyChange > maxChangeAmount){
+        maxChangeAmount = monthlyChange;
+        maxChangeMonth = finances[index][0];
+    }
+    // greatest decrease
+    if (monthlyChange < minChangeAmount){
+        minChangeAmount = monthlyChange;
+        minChangeMonth = finances[index][0];
+    }
+}
+
+// averge Change per month
+averageChange /= numberOfMonth;
+// average in full pennies
+averageChange = Math.round(averageChange * 100) / 100
+
+let analysisString = `
+Financial Analysis
+----------------------------
+Total Months: ${numberOfMonth}
+Total Profit: $${totalProfit}
+Average  Change: $${averageChange}
+Greatest Increase in Profits: ${maxChangeMonth} ($${maxChangeAmount})
+Greatest Decrease in Profits: ${minChangeMonth} ($${minChangeAmount})
+`;
+
+console.log(analysisString);
