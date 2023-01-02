@@ -145,3 +145,5 @@ Greatest Decrease in Profits: ${minChangeMonth} ($${minChangeAmount})
 `;
 
 console.log(analysisString);
+
+document.getElementById('financeId').innerHTML = analysisString;
