@@ -132,7 +132,7 @@ for (let index = 1; index < numberOfMonth; index++) {
 // averge Change per month
 averageChange /= numberOfMonth;
 // average in full pennies
-averageChange = Math.round(averageChange * 100) / 100
+averageChange = Math.round(averageChange * 100) / 100;
 
 let analysisString = `
 Financial Analysis
